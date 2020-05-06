@@ -1,12 +1,11 @@
 import React from 'react'
-// import PurveyorContainer from './components/PurveyorContainer';
+import PurveyorCard from './components/PurveyorCard';
 
 
-export const Home =() => (
+export const Home =(props) => (
 
-    <div>
-        <h1>Home page</h1>
-        <p>There will be all the types of supplies here</p>
+    <div className='food-container'>
+    {props.purveyors.map(purveyor => <PurveyorCard purveyor={purveyor}/>)}
     </div>
 
 )

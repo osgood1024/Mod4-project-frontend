@@ -10,8 +10,6 @@ import {Layout} from './components/Layout';
 import {NavigationBar} from './components/NavigationBar';
 import {Jumbotron} from './components/Jumbotron';
 
-import PurveyorContainer from './components/PurveyorContainer';
-
 // import Button from 'react-bootstrap/Button';
 
 
@@ -19,6 +17,8 @@ class App extends Component {
 
   state = {
     purveyors: [],
+    products:[],
+    restaurants:[],
     search: ''
   }
 
@@ -28,15 +28,32 @@ handleSearch= (e) =>{
     },()=>console.log(this.state))
   }
 
+
+
   componentDidMount = () => {
+  
     fetch("http://localhost:3000/api/purveyors")
     .then(response => response.json())
     .then(data => this.setState({ 
-      purveyors: data
+      purveyors: data 
     }))
+
+    fetch("http://localhost:3000/api/products")
+    .then(response => response.json())
+    .then(data => this.setState({ 
+      products: data 
+    }))
+
+    fetch("http://localhost:3000/api/restaurants")
+    .then(response => response.json())
+    .then(data => this.setState({ 
+      restaurants: data 
+    }))
+
   }
 
   render(){
+    console.log(this.state)
     return (
      <React.Fragment>
 
@@ -45,7 +62,9 @@ handleSearch= (e) =>{
        <Layout>
         <Router>
           <Switch>
-            <Route exact path ="/home" component={Home} />
+            <Route exact path ="/home" render={
+              props =><Home {...props} purveyors={this.state.purveyors}/>
+            } />
             <Route path ="/inventory" component={Inventory}/>
             <Route path ="/supplier" component={Supplier}/>
             <Route component={NoMatch}/>
@@ -53,7 +72,6 @@ handleSearch= (e) =>{
         </Router>
        </Layout>
 
-       <PurveyorContainer purveyors={this.state.purveyors}/>
 
 
 
