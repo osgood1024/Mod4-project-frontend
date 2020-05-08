@@ -25,7 +25,6 @@ export const Inventory =() => (
             <h3 className="ui center aligned header">Suppliers' name (company)</h3>
           </th>
         </tr>
-        {/* {render all the inventory index here} */}
       </tbody>
     </table>
 

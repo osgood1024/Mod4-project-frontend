@@ -1,21 +1,86 @@
 import React from 'react'
+import {Card,ListGroup,ListGroupItem,Form} from "react-bootstrap"
+// import styled from 'styled-components';
+// import  Meat from '../assets/meat.jpg';
 
-const PurveyorCard = (props) => {
-  return (
-    <div className='food-category'>
+class PurveyorCard extends React.Component{
 
-<h3>{props.purveyor.name}</h3>
-{/* <h3 className='kaiju-card-power'>Power: {power}</h3> */}
-
-{/* <img className='kaiju-card-image' src={image} alt={"Maybe something should go here"} /> */}
-
-{/* What should this edit button do? */}
-{/* <button className='kaiju-card-edit-button' onClick={this.props.handleEdit}>Edit</button> */}
+  state={
+    toggle : false,
 
 
-     
-    </div>
-  )
+  }
+
+
+  handleToggle=()=>{
+    this.setState({
+      toggle: !this.state.toggle
+    })
+  }
+
+
+
+  // handleClick=(id)=>{
+    
+  //   let productId=this.props.product.filter(pid=>pid.id === id)
+
+  // }
+
+
+
+
+  
+  render(){
+   
+    let image =`./${this.props.purveyor.product}.jpg`
+
+  
+    return (
+      <Card className="food-category">
+        
+      <Card.Body>
+
+        <Card.Title> {this.props.purveyor.name} </Card.Title>
+      
+        <Card.Img src={image} onClick={()=>this.handleToggle()}/>
+
+        {this.state.toggle &&  
+
+        <ListGroup className="list-group-flush" >
+        
+            <ListGroupItem>
+           {
+           this.props.product.map(product=> <Form.Check type="checkbox" label={product.name} onClick={null} />   )
+           }
+            </ListGroupItem>
+           
+        </ListGroup>
+
+        }
+         
+      </Card.Body>
+
+      
+  
+      </Card>
+
+
+      
+      
+  
+)
+
+  }
+
+
+  
 }
+
+
+
+
+
+
+
 
 export default PurveyorCard

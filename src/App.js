@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import React, {Component} from 'react';
 import {Home} from './Home';
 import {Inventory} from './Inventory_list';
-import {Supplier} from './Supplier';
+// import {Supplier} from './Supplier';
 import {NoMatch} from './NoMatch';
 import {Layout} from './components/Layout';
 import {NavigationBar} from './components/NavigationBar';
@@ -29,6 +29,9 @@ handleSearch= (e) =>{
   }
 
 
+ 
+
+
 
   componentDidMount = () => {
   
@@ -40,8 +43,8 @@ handleSearch= (e) =>{
 
     fetch("http://localhost:3000/api/products")
     .then(response => response.json())
-    .then(data => this.setState({ 
-      products: data 
+    .then(data=> this.setState({ 
+      products: data
     }))
 
     fetch("http://localhost:3000/api/restaurants")
@@ -52,8 +55,20 @@ handleSearch= (e) =>{
 
   }
 
+
+
+
+
+
+
   render(){
     console.log(this.state)
+    const purveyorProduct= this.state.purveyors.filter(purveyor => purveyor.product === this.state.type)
+    // console.log(type)
+    const productType= this.state.products.filter(product => product.product_type === purveyorProduct)
+    console.log(productType)
+    // let purveyorType= this.state.purveyors.filter(foodtype=>foodtype.product === productType)
+    
     return (
      <React.Fragment>
 
@@ -63,10 +78,10 @@ handleSearch= (e) =>{
         <Router>
           <Switch>
             <Route exact path ="/home" render={
-              props =><Home {...props} purveyors={this.state.purveyors}/>
+              props =><Home {...props} purveyors={this.state.purveyors} products={this.state.products}  />
             } />
             <Route path ="/inventory" component={Inventory}/>
-            <Route path ="/supplier" component={Supplier}/>
+            {/* <Route path ="/supplier" component={Supplier}/> */}
             <Route component={NoMatch}/>
           </Switch>
         </Router>

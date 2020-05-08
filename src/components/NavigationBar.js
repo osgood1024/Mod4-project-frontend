@@ -34,7 +34,7 @@ export const NavigationBar=(props)=>(
                 <Nav className="ml-auto">
                     <Nav.Item><Nav.Link href="/home">Home</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/inventory">Inventory List</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/supplier">Supplier</Nav.Link></Nav.Item>
+                    {/* <Nav.Item><Nav.Link href="/supplier">Supplier</Nav.Link></Nav.Item> */}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
